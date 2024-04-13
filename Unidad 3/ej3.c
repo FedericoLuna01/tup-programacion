@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 /*
 Realizar un programa de conversión que traduzca un peso ingresado en Kg a gramos, o
@@ -13,11 +14,30 @@ void main()
 {
     int opcion;
     float pesoEnKilos, total;
+    bool validacion;
 
-    printf("A que peso lo quiere convertir?\n1-Gramos\n2-Toneladas\n3-Libras\n4-Onzas\nIngrese una opcion:");
-    scanf("%i", &opcion);
+    printf("A que peso lo quiere convertir?\n1-Gramos\n2-Toneladas\n3-Libras\n4-Onzas\n");
+    // Valido que ingrese un valor válido
+    do
+    {
+        printf("Ingrese una opcion: ");
+        scanf("%i", &opcion);
+        if (opcion >= 1 && opcion <= 4)
+        {
+            // Si la opcion está entre 1 y 4 pasa la validacion
+            validacion = true;
+        }
+        else
+        {
+            validacion = false;
+            printf("La opcion es incorrecta\n");
+        }
+        // Si la validacion sigue siendo false vuelve a hacer el DO
+    } while (validacion == false);
+
     printf("Ingrese el peso en Kilos: ");
     scanf("%f", &pesoEnKilos);
+
     switch (opcion)
     {
     case 1:
