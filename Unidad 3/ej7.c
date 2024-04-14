@@ -8,13 +8,13 @@ void main()
 {
     int num, menor, mayor;
     int i;
-    menor = 0;
     mayor = 0;
     for (i = 1; i <= 5; i++)
     {
-        printf("Ingrese el %i° numero: ", i);
+        printf("Ingrese el %i numero: ", i);
         scanf("%i", &num);
-        if (menor > num || menor == 0)
+
+        if (menor > num || i == 1)
         {
             menor = num;
             printf("Ahora el menor paso a ser %i\n", menor);

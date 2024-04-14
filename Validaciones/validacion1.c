@@ -13,7 +13,7 @@ int main()
         // IMPORTANTE! En strings no agregar & en la variable para escanear
         scanf(" %1s", sexo);
         // strcmp es una función que devuelve 0 en caso de que sean iguales
-        if (strcmp(sexo, "m") != 0 & strcmp(sexo, "f") != 0)
+        if (strcmp(sexo, "m") != 0 && strcmp(sexo, "f") != 0)
         {
             printf("Ingrese una opcion valida\n");
             validacion = false;
