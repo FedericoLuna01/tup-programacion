@@ -24,5 +24,5 @@ void main()
 
     } while (strcmp(opcion, "s") == 0); // En caso de que la opcion sea "s" vuelve al DO
     promedio = totalNotas / cantAlumnos;
-    printf("El promedio de los %i es: %.2f", cantAlumnos, promedio);
+    printf("El promedio de %i alumnos es: %.2f", cantAlumnos, promedio);
 }

@@ -12,6 +12,7 @@ void main()
     for (i = 1; i <= 5; i++)
     {
         printf("Ingrese el %i numero: ", i);
+        // TODO: Validar que no sea un numero negativo
         scanf("%i", &num);
 
         if (menor > num || i == 1)
