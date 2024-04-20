@@ -20,152 +20,133 @@ void main()
     char turno;
     float horasTarde, horasManiana;
 
-    for (int i = 1; i <= 5; i++)
+    printf("Ingrese la cantidad de empleados de marketing: ");
+    scanf("%i", &cantEmpleadosMarketing);
+    for (int j = 1; j <= cantEmpleadosMarketing; j++)
     {
-        switch (i)
+        printf("Ingrese las horas trabajadas del empleado %i: ", j);
+        scanf("%f", &horasTrabajadasMarketing);
+
+        totalHorasTrabajadasMarketing += horasTrabajadasMarketing;
+
+        printf("En que turno trabaja? M / T: ");
+        scanf(" %c", &turno);
+
+        if (turno == 'M' || turno == 'm')
         {
-        case 1:
-            printf("Ingrese la cantidad de empleados de marketing: ");
-            scanf("%i", &cantEmpleadosMarketing);
+            horasManiana += horasTrabajadasMarketing;
+        }
+        else if (turno == 'T' || turno == 't')
+        {
+            horasTarde += horasTrabajadasMarketing;
+        }
+        else
+        {
+            printf("Codigo incorrecto\n");
+        }
+    }
 
-            for (int j = 1; j <= cantEmpleadosMarketing; j++)
-            {
-                printf("Ingrese las horas trabajadas del empleado %i: ", j);
-                scanf("%f", &horasTrabajadasMarketing);
+    printf("Ingrese la cantidad de empleados de comercial: ");
+    scanf("%i", &cantEmpleadosComercial);
+    for (int k = 1; k <= cantEmpleadosComercial; k++)
+    {
+        printf("Ingrese las horas trabajadas del empleado %i: ", k);
+        scanf("%f", &horasTrabajadasComercial);
 
-                totalHorasTrabajadasMarketing += horasTrabajadasMarketing;
+        totalHorasTrabajadasComercial += horasTrabajadasComercial;
 
-                printf("En que turno trabaja? M / T: ");
-                scanf(" %c", &turno);
+        printf("En que turno trabaja? M / T: ");
+        scanf(" %c", &turno);
 
-                if (turno == 'M' || turno == 'm')
-                {
-                    horasManiana += horasTrabajadasMarketing;
-                }
-                else if (turno == 'T' || turno == 't')
-                {
-                    horasTarde += horasTrabajadasMarketing;
-                }
-                else
-                {
-                    printf("Codigo incorrecto\n");
-                }
-            }
-            break;
-        case 2:
-            printf("Ingrese la cantidad de empleados de comercial: ");
-            scanf("%i", &cantEmpleadosComercial);
+        if (turno == 'M' || turno == 'm')
+        {
+            horasManiana += horasTrabajadasComercial;
+        }
+        else if (turno == 'T' || turno == 't')
+        {
+            horasTarde += horasTrabajadasComercial;
+        }
+        else
+        {
+            printf("Codigo incorrecto\n");
+        }
+    }
 
-            for (int k = 1; k <= cantEmpleadosComercial; k++)
-            {
-                printf("Ingrese las horas trabajadas del empleado %i: ", k);
-                scanf("%f", &horasTrabajadasComercial);
+    printf("Ingrese la cantidad de empleados de soporte: ");
+    scanf("%i", &cantEmpleadosSoporte);
+    for (int l = 1; l <= cantEmpleadosSoporte; l++)
+    {
+        printf("Ingrese las horas trabajadas del empleado %i: ", l);
+        scanf("%f", &horasTrabajadasSoporte);
 
-                totalHorasTrabajadasComercial += horasTrabajadasComercial;
+        totalHorasTrabajadasSoporte += horasTrabajadasSoporte;
 
-                printf("En que turno trabaja? M / T: ");
-                scanf(" %c", &turno);
+        printf("En que turno trabaja? M / T: ");
+        scanf(" %c", &turno);
 
-                if (turno == 'M' || turno == 'm')
-                {
-                    horasManiana += horasTrabajadasComercial;
-                }
-                else if (turno == 'T' || turno == 't')
-                {
-                    horasTarde += horasTrabajadasComercial;
-                }
-                else
-                {
-                    printf("Codigo incorrecto\n");
-                }
-            }
-            break;
-        case 3:
-            printf("Ingrese la cantidad de empleados de soporte: ");
-            scanf("%i", &cantEmpleadosSoporte);
+        if (turno == 'M' || turno == 'm')
+        {
+            horasManiana += horasTrabajadasSoporte;
+        }
+        else if (turno == 'T' || turno == 't')
+        {
+            horasTarde += horasTrabajadasSoporte;
+        }
+        else
+        {
+            printf("Codigo incorrecto\n");
+        }
+    }
 
-            for (int l = 1; l <= cantEmpleadosSoporte; l++)
-            {
-                printf("Ingrese las horas trabajadas del empleado %i: ", l);
-                scanf("%f", &horasTrabajadasSoporte);
+    printf("Ingrese la cantidad de empleados de admin: ");
+    scanf("%i", &cantEmpleadosAdmin);
+    for (int m = 1; m <= cantEmpleadosAdmin; m++)
+    {
+        printf("Ingrese las horas trabajadas del empleado %i: ", m);
+        scanf("%f", &horasTrabajadasAdmin);
 
-                totalHorasTrabajadasSoporte += horasTrabajadasSoporte;
+        totalHorasTrabajadasAdmin += horasTrabajadasAdmin;
 
-                printf("En que turno trabaja? M / T: ");
-                scanf(" %c", &turno);
+        printf("En que turno trabaja? M / T: ");
+        scanf(" %c", &turno);
 
-                if (turno == 'M' || turno == 'm')
-                {
-                    horasManiana += horasTrabajadasSoporte;
-                }
-                else if (turno == 'T' || turno == 't')
-                {
-                    horasTarde += horasTrabajadasSoporte;
-                }
-                else
-                {
-                    printf("Codigo incorrecto\n");
-                }
-            }
-            break;
-        case 4:
-            printf("Ingrese la cantidad de empleados de admin: ");
-            scanf("%i", &cantEmpleadosAdmin);
+        if (turno == 'M' || turno == 'm')
+        {
+            horasManiana += horasTrabajadasAdmin;
+        }
+        else if (turno == 'T' || turno == 't')
+        {
+            horasTarde += horasTrabajadasAdmin;
+        }
+        else
+        {
+            printf("Codigo incorrecto\n");
+        }
+    }
 
-            for (int m = 1; m <= cantEmpleadosAdmin; m++)
-            {
-                printf("Ingrese las horas trabajadas del empleado %i: ", m);
-                scanf("%f", &horasTrabajadasAdmin);
+    printf("Ingrese la cantidad de empleados de finanzas: ");
+    scanf("%i", &cantEmpleadosFinanzas);
+    for (int j = 1; j <= cantEmpleadosFinanzas; j++)
+    {
+        printf("Ingrese las horas trabajadas del empleado %i: ", j);
+        scanf("%f", &horasTrabajadasFinanzas);
 
-                totalHorasTrabajadasAdmin += horasTrabajadasAdmin;
+        totalHorasTrabajadasFinanzas += horasTrabajadasFinanzas;
 
-                printf("En que turno trabaja? M / T: ");
-                scanf(" %c", &turno);
+        printf("En que turno trabaja? M / T: ");
+        scanf(" %c", &turno);
 
-                if (turno == 'M' || turno == 'm')
-                {
-                    horasManiana += horasTrabajadasAdmin;
-                }
-                else if (turno == 'T' || turno == 't')
-                {
-                    horasTarde += horasTrabajadasAdmin;
-                }
-                else
-                {
-                    printf("Codigo incorrecto\n");
-                }
-            }
-            break;
-        case 5:
-            printf("Ingrese la cantidad de empleados de finanzas: ");
-            scanf("%i", &cantEmpleadosFinanzas);
-
-            for (int j = 1; j <= cantEmpleadosFinanzas; j++)
-            {
-                printf("Ingrese las horas trabajadas del empleado %i: ", j);
-                scanf("%f", &horasTrabajadasFinanzas);
-
-                totalHorasTrabajadasFinanzas += horasTrabajadasFinanzas;
-
-                printf("En que turno trabaja? M / T: ");
-                scanf(" %c", &turno);
-
-                if (turno == 'M' || turno == 'm')
-                {
-                    horasManiana += horasTrabajadasFinanzas;
-                }
-                else if (turno == 'T' || turno == 't')
-                {
-                    horasTarde += horasTrabajadasFinanzas;
-                }
-                else
-                {
-                    printf("Codigo incorrecto\n");
-                }
-            }
-            break;
-        default:
-            break;
+        if (turno == 'M' || turno == 'm')
+        {
+            horasManiana += horasTrabajadasFinanzas;
+        }
+        else if (turno == 'T' || turno == 't')
+        {
+            horasTarde += horasTrabajadasFinanzas;
+        }
+        else
+        {
+            printf("Codigo incorrecto\n");
         }
     }
 
