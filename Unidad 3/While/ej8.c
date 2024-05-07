@@ -38,7 +38,7 @@ void main()
 
                 } while (venta != 0);
             }
-            else if (codigoVendedor == 'b')
+            else if (codigoVendedor == 'b' || codigoVendedor != 'B')
             {
                 do
                 {
@@ -93,6 +93,10 @@ void main()
                     }
 
                 } while (venta != 0);
+            }
+            else
+            {
+                printf("Codigo incorrecto\n");
             }
         }
 
