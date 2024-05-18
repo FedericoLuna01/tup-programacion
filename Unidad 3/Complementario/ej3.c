@@ -29,8 +29,8 @@ void main()
 
         if (primerNumero)
         {
-            numMayor = 0;
-            numMenor = 0;
+            numMayor = num;
+            numMenor = num;
             primerNumero = false;
         }
         else
@@ -42,7 +42,7 @@ void main()
 
             if (num < numMenor)
             {
-                numMayor = num;
+                numMenor = num;
             }
         }
     }
