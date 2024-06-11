@@ -15,10 +15,11 @@ puede contener tener los valores “by_name” o “by_age.
 
 void cargarDatos(char datos[CANT_PERSONAS][5][20]);
 int busquedaPaciente(char datos[CANT_PERSONAS][5][20], char dni[]);
-void ordenarPacientes(char datos[CANT_PERSONAS][5][20], int columnaOrd, char tipo[]);
+void ordenarPacientes(char datos[CANT_PERSONAS][5][20], int columnaOrd);
 void mostrarListaPacientes(char datos[CANT_PERSONAS][5][20]);
 int buscarNombreYApellido(char datos[CANT_PERSONAS][5][20], char nombreABuscar[], char apellidoABuscar[]);
 void mostrarPaciente(char datos[CANT_PERSONAS][5][20], int pos);
+void ordenarPacientesXNombreyApellido(char datos[CANT_PERSONAS][5][20]);
 
 void main()
 {
@@ -39,6 +40,7 @@ void main()
         printf("3-Ordenar por apellido\n");
         printf("4-Ordenar por nombre y apellido\n");
         printf("5-Buscar por nombre y apellido\n");
+        printf("6-Ordenar por edad\n");
         printf("0-Salir\n");
         printf("Ingrese una opcion: ");
         scanf("%i", &opcMenu);
@@ -70,22 +72,20 @@ void main()
             break;
         case 3:
             system("cls");
-            ordenarPacientes(datos, 1, "by_age");
+            ordenarPacientes(datos, 1);
             mostrarListaPacientes(datos);
             system("pause");
             break;
         case 4:
             system("cls");
-            // NO FUNCIONA
-            // ordenarPacientes(datos, 1);
-            // ordenarPacientes(datos, 0);
+            ordenarPacientesXNombreyApellido(datos);
             mostrarListaPacientes(datos);
             system("pause");
             break;
         case 5:
             system("cls");
-            // ordenarPacientes(datos, 1);
-            // ordenarPacientes(datos, 0);
+            ordenarPacientes(datos, 1);
+            ordenarPacientes(datos, 0);
             printf("Ingrese el nombre: ");
             scanf("%s", nombreABuscar);
             printf("Ingrese el apellido: ");
@@ -102,6 +102,12 @@ void main()
             }
             system("pause");
             break;
+        case 6:
+            system("cls");
+            ordenarPacientes(datos, 4);
+            mostrarListaPacientes(datos);
+            system("pause");
+            break;
         case 0:
             break;
         default:
@@ -115,7 +121,7 @@ void main()
 int busquedaPaciente(char datos[CANT_PERSONAS][5][20], char dni[])
 {
     bool encontrado = false;
-    int i = 0, pos;
+    int i = 0, pos = -1;
     while (encontrado == false && i < CANT_PERSONAS)
     {
         if (strcmp(datos[i][2], dni) == 0)
@@ -124,7 +130,6 @@ int busquedaPaciente(char datos[CANT_PERSONAS][5][20], char dni[])
             pos = i;
             i = CANT_PERSONAS;
             encontrado = true;
-            return pos;
         }
         else
         {
@@ -132,29 +137,26 @@ int busquedaPaciente(char datos[CANT_PERSONAS][5][20], char dni[])
         }
     }
 
-    return -1;
+    return pos;
 }
 
-void ordenarPacientes(char datos[CANT_PERSONAS][5][20], int columnaOrd, char tipo[])
+void ordenarPacientes(char datos[CANT_PERSONAS][5][20], int columnaOrd)
 {
-    printf("%s", tipo);
-    int posMenor;
     char aux[5][20];
+
     for (int i = 0; i < CANT_PERSONAS - 1; i++)
     {
-        posMenor = i;
         for (int j = i + 1; j < CANT_PERSONAS; j++)
         {
-            if (strcmp(datos[j][columnaOrd], datos[posMenor][columnaOrd]) == -1)
+            if (strcmp(datos[j][columnaOrd], datos[i][columnaOrd]) == -1)
             {
-                posMenor = j;
+                for (int k = 0; k < 5; k++)
+                {
+                    strcpy(aux[k], datos[i][k]);
+                    strcpy(datos[i][k], datos[j][k]);
+                    strcpy(datos[j][k], aux[k]);
+                }
             }
-        }
-        for (int k = 0; k < 5; k++)
-        {
-            strcpy(aux[k], datos[i][k]);
-            strcpy(datos[i][k], datos[posMenor][k]);
-            strcpy(datos[posMenor][k], aux[k]);
         }
     }
 
@@ -165,6 +167,35 @@ void ordenarPacientes(char datos[CANT_PERSONAS][5][20], int columnaOrd, char tip
     else if (columnaOrd == 1)
     {
         printf("Pacientes ordenados por apellido\n");
+    }
+}
+
+void ordenarPacientesXNombreyApellido(char datos[CANT_PERSONAS][5][20])
+{
+    char aux[5][20];
+
+    for (int i = 0; i < CANT_PERSONAS - 1; i++)
+    {
+        for (int j = i + 1; j < CANT_PERSONAS; j++)
+        {
+            char nombreYApellido[50];
+            strcpy(nombreYApellido, datos[i][1]);
+            strcat(nombreYApellido, datos[i][0]);
+
+            char nombreYApellidoSiguiente[50];
+            strcpy(nombreYApellidoSiguiente, datos[j][1]);
+            strcat(nombreYApellidoSiguiente, datos[j][0]);
+
+            if (strcmp(nombreYApellidoSiguiente, nombreYApellido) == -1)
+            {
+                for (int k = 0; k < 5; k++)
+                {
+                    strcpy(aux[k], datos[i][k]);
+                    strcpy(datos[i][k], datos[j][k]);
+                    strcpy(datos[j][k], aux[k]);
+                }
+            }
+        }
     }
 }
 
@@ -188,13 +219,11 @@ int buscarNombreYApellido(char datos[CANT_PERSONAS][5][20], char nombreABuscar[]
         char nombre[20];
         strcpy(nombre, datos[centro][0]);
         strcpy(nombreYApellido, strcat(nombre, datos[centro][1]));
-        // printf("buscando a %s\n", nombreYApellido);
 
         if (strcmp(nombreYApellido, aBuscar) == 0)
         {
             resultado = centro;
             encontrado = true;
-            // printf("Encontrado en la pos %i\n", resultado);
         }
         else
         {
@@ -207,11 +236,6 @@ int buscarNombreYApellido(char datos[CANT_PERSONAS][5][20], char nombreABuscar[]
                 superior = centro - 1;
             }
         }
-
-        // if (inferior > superior)
-        // {
-        //     printf("No se encontro\n");
-        // }
 
     } while (!encontrado && inferior <= superior);
 
@@ -252,31 +276,40 @@ void mostrarPaciente(char datos[CANT_PERSONAS][5][20], int pos)
 
 void cargarDatos(char datos[CANT_PERSONAS][5][20])
 {
-    // strcpy(datos[0][0], "Ana");
-    // strcpy(datos[1][0], "Camila");
-    // strcpy(datos[2][0], "Bruno");
-    // strcpy(datos[3][0], "Dardo");
-    // strcpy(datos[4][0], "Ernestina");
-    // strcpy(datos[5][0], "Fausto");
-    // strcpy(datos[6][0], "Jasmin");
-    // strcpy(datos[7][0], "Leonardo");
-    strcpy(datos[0][0], "a");
-    strcpy(datos[1][0], "a");
-    strcpy(datos[2][0], "b");
-    strcpy(datos[3][0], "b");
-    strcpy(datos[4][0], "c");
-    strcpy(datos[5][0], "c");
-    strcpy(datos[6][0], "d");
-    strcpy(datos[7][0], "d");
+    strcpy(datos[0][0], "Ana");
+    strcpy(datos[1][0], "Camila");
+    strcpy(datos[2][0], "Bruno");
+    strcpy(datos[3][0], "Dardo");
+    strcpy(datos[4][0], "Ernestina");
+    strcpy(datos[5][0], "Fausto");
+    strcpy(datos[6][0], "Jasmin");
+    strcpy(datos[7][0], "Leonardo");
+    // strcpy(datos[0][0], "a");
+    // strcpy(datos[1][0], "a");
+    // strcpy(datos[2][0], "b");
+    // strcpy(datos[3][0], "b");
+    // strcpy(datos[4][0], "c");
+    // strcpy(datos[5][0], "c");
+    // strcpy(datos[6][0], "d");
+    // strcpy(datos[7][0], "d");
 
-    strcpy(datos[0][1], "b");
-    strcpy(datos[1][1], "a");
-    strcpy(datos[2][1], "b");
-    strcpy(datos[3][1], "c");
-    strcpy(datos[4][1], "d");
-    strcpy(datos[5][1], "a");
-    strcpy(datos[6][1], "a");
-    strcpy(datos[7][1], "a");
+    strcpy(datos[0][1], "Martinez");
+    strcpy(datos[1][1], "Noe");
+    strcpy(datos[2][1], "Noe");
+    strcpy(datos[3][1], "Pistilli");
+    strcpy(datos[4][1], "Quesada");
+    strcpy(datos[5][1], "Ramirez");
+    strcpy(datos[6][1], "Sosa");
+    strcpy(datos[7][1], "Tolosa");
+
+    // strcpy(datos[0][1], "b");
+    // strcpy(datos[1][1], "a");
+    // strcpy(datos[2][1], "b");
+    // strcpy(datos[3][1], "c");
+    // strcpy(datos[4][1], "d");
+    // strcpy(datos[5][1], "a");
+    // strcpy(datos[6][1], "a");
+    // strcpy(datos[7][1], "a");
 
     strcpy(datos[0][2], "17123456");
     strcpy(datos[1][2], "25789101");
