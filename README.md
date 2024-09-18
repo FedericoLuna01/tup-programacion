@@ -1,7 +1,5 @@
 # Ejercicios de Programación de TUP
 
-## Datos
-
 ### Como definir constantes
 
 ```C
